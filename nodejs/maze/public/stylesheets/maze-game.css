@@ -25,3 +25,24 @@ span.options {
   font-family: monospace;
 }
 
+table#board {
+    table-layout : fixed;
+    border: solid black;
+    empty-cells: show;
+}
+#board td {
+    width: 1em;
+    height: 1em;
+}
+.nonav {
+    color: darkgrey;
+}
+td.visited {
+    background-color: lightgray;
+}
+td.current {
+    background-color: green;
+}
+td.exit {
+    background-color: red;
+}

@@ -5,14 +5,18 @@
 
 // for express
 var express = require('express');
-var app = module.exports = express.createServer();
+var app = module.exports = express();
 
 // for couch
-var cradle = require('cradle');
-var db = new(cradle.Connection)().database('maze-data');
+//var cradle = require('cradle');
+//var db = new(cradle.Connection)().database('maze-data');
+
+// for filesystem access
+var fs = require('fs');
 
 // global data
 var contentType = 'application/xml';
+var globalSite = 'http://localhost:3000'
 
 // Configuration
 app.configure(function(){
@@ -37,7 +41,7 @@ app.get('/maze/', function(req, res){
   res.header('content-type',contentType);
   res.render('collection', {
     title : 'Maze+XML Hypermedia Example',
-    site  : 'http://localhost:3000/maze'
+    site  : globalSite
   });
 });
 
@@ -46,15 +50,22 @@ app.get('/maze/:m', function (req, res) {
   var mz;
   
   mz = (req.params.m || 'none');
-
-  db.get(mz, function (err, doc) {
+  
+  var cType = req.get("content-type");
+  console.log("%s", cType);
+      
+  //db.get(mz, function (err, doc) {
+  fs.readFile(mz+".json", function(err, data){
+    var doc = JSON.parse(data);
+    
     res.header('content-type',contentType);
     res.render('item', {
-      site  : 'http://localhost:3000/maze',
+      site  : globalSite + '/maze',
       maze  : mz,
       debug : doc
     });
   });
+  
 });
 
 // handle exit 
@@ -66,7 +77,7 @@ app.get('/maze/:m/999', function (req, res) {
 
   res.header('content-type', contentType);
   res.render('exit', {
-    site  : 'http://localhost:3000/maze',
+    site  : globalSite + '/maze',
     maze  : mz,
     cell  : cz,
     total : 0,
@@ -83,17 +94,20 @@ app.get('/maze/:m/:c', function (req, res) {
   mz = (req.params.m || 'none');
   cz = (req.params.c || '0');
 
-  db.get(mz, function (err, doc) {
+  //db.get(mz, function (err, doc) {
+  fs.readFile(mz+".json", function(err, data){
+    var doc = JSON.parse(data);
+    
     i = parseInt(cz.split(':')[0], 10);
     x = 'cell' + i;
-    
+    console.log(doc.cells);
     tot = Object.keys(doc.cells).length;
     ex = (i === tot-1 ? '1' : '0');
     sq = Math.sqrt(tot);
     
     res.header('content-type', contentType);
     res.render('cell', {
-      site  : 'http://localhost:3000/maze',
+      site  : globalSite + '/maze',
       maze  : mz,
       cell  : cz,
       total : tot,
@@ -108,5 +122,6 @@ app.get('/maze/:m/:c', function (req, res) {
 // Only listen on $ node app.js
 if (!module.parent) {
   app.listen(3000);
-  console.log("Express server listening on port %d", app.address().port);
+  app.set("env","development");
+  console.log("Express server listening on port %d", 3000);
 }
