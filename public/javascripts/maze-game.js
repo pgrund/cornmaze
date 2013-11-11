@@ -8,6 +8,7 @@ var thisPage = function() {
     g.links = [];
     g.mediaType = "application/vnd.amundsen.maze+xml";
     g.startLink = "http://cornmaze-grund.rhcloud.com/maze/five-by-five";
+//    g.startLink = "http://localhost:8080/maze/five-by-five";
     g.sorryMsg = 'Sorry, I don\'t understand what you want to do.';
     g.successMsg = 'Congratulations! you\'ve made it out of the maze!';
 
@@ -91,6 +92,10 @@ var thisPage = function() {
             g.moves++;
             if (mv === 'exit') {
                 txt = g.moves + ': ' + g.successMsg + '<br />' + txt;
+                var old = document.getElementsByClassName("visited");
+                for(i = 0; i< old.length; i++){
+                    old[i].classList.remove('visited');
+                }
             }
             else {
                 txt = g.moves + ':' + mv + '<br />' + txt;
