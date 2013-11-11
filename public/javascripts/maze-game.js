@@ -7,7 +7,7 @@ var thisPage = function() {
     g.moves = 0;
     g.links = [];
     g.mediaType = "application/vnd.amundsen.maze+xml";
-    g.startLink = "http://localhost:8080/maze/five-by-five/";
+    g.startLink = "http://cornmaze-grund.rhcloud.com/maze/five-by-five";
     g.sorryMsg = 'Sorry, I don\'t understand what you want to do.';
     g.successMsg = 'Congratulations! you\'ve made it out of the maze!';
 
@@ -101,7 +101,6 @@ var thisPage = function() {
 
     function processLinks(response) {
         var xml, link, i, x, y, j, rels, href;
-        
         g.links = [];
         xml = response.selectNodes('//link');
         for (i = 0, x = xml.length; i < x; i++) {
