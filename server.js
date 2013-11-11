@@ -13,8 +13,8 @@ var SampleApp = function() {
     //  Scope.
     var self = this;
     
-    contentType = 'application/xml';
-    globalSite='';
+    self.contentType = 'application/xml';
+    self.globalSite='';
 
     /*  ================================================================  */
     /*  Helper functions.                                                 */
@@ -33,9 +33,10 @@ var SampleApp = function() {
             //  allows us to run/test the app locally.
             console.warn('No OPENSHIFT_NODEJS_IP var, using 127.0.0.1');
             self.ipaddress = "127.0.0.1";
+            self.globalSite = "http://localhost:8080";
+        } else {
+            self.globalSite = "http://cornmaze-grund.rhcloud.com";
         }
-       self.globalSite = self.ipaddress +":"+self.port;
-        
     };
 
 
@@ -177,27 +178,13 @@ var SampleApp = function() {
 var zapp = new SampleApp();
 zapp.initialize();
 zapp.start();
-/*
-zapp.app.get('/mazes', function(req, res) {
-    console.log("list of available mazes");
-});
 
-zapp.app.get('/mazes/:m', function(req, res) {
-    var maze = req.params.m;
-    console.log("get single maze %s", maze);
-});
-zapp.app.get('/mazes/:m/:c', function(req, res) {
-    var maze = req.params.m;
-    var cell = req.params.c;
-    console.log("get single room (%s) maze %s", cell, maze);
-}); 
-*/
 // handle collection 
 zapp.app.get('/maze/', function(req, res){
-  res.header('content-type',this.contentType);
+  res.header('content-type',zapp.contentType);
   res.render('collection', {
     title : 'Maze+XML Hypermedia Example',
-    site  : 'http://'+ this.ipaddress + ":" + this.port
+    site  : zapp.globalSite
   });
 });
 
@@ -214,9 +201,9 @@ zapp.app.get('/maze/:m', function (req, res) {
   fs.readFile(mz+".json", function(err, data){
     var doc = JSON.parse(data);
     
-    res.header('content-type',this.contentType);
+    res.header('content-type',zapp.contentType);
     res.render('item', {
-      site  : this.globalSite + '/maze',
+      site  : zapp.globalSite + '/maze',
       maze  : mz,
       debug : doc
     });
@@ -231,9 +218,9 @@ zapp.app.get('/maze/:m/999', function (req, res) {
   mz = (req.params.m || 'none');
   cz = (req.params.c || '0');
 
-  res.header('content-type', this.contentType);
+  res.header('content-type', zapp.contentType);
   res.render('exit', {
-    site  : this.globalSite + '/maze',
+    site  : zapp.globalSite + '/maze',
     maze  : mz,
     cell  : cz,
     total : 0,
@@ -261,9 +248,9 @@ zapp.app.get('/maze/:m/:c', function (req, res) {
     ex = (i === tot-1 ? '1' : '0');
     sq = Math.sqrt(tot);
     
-    res.header('content-type', this.contentType);
+    res.header('content-type', zapp.contentType);
     res.render('cell', {
-      site  : this.globalSite + '/maze',
+      site  : zapp.globalSite + '/maze',
       maze  : mz,
       cell  : cz,
       total : tot,
