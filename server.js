@@ -14,6 +14,7 @@ var SampleApp = function() {
     var self = this;
     
     contentType = 'application/xml';
+    globalSite='';
 
     /*  ================================================================  */
     /*  Helper functions.                                                 */
@@ -33,7 +34,8 @@ var SampleApp = function() {
             console.warn('No OPENSHIFT_NODEJS_IP var, using 127.0.0.1');
             self.ipaddress = "127.0.0.1";
         }
-        ;
+       self.globalSite = self.ipaddress +":"+self.port;
+        
     };
 
 
