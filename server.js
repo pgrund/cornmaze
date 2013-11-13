@@ -202,12 +202,17 @@ zapp.app.get('/maze/:m', function (req, res) {
   fs.readFile(mz+".json", function(err, data){
     var doc = JSON.parse(data);
     
+    var tot = Object.keys(doc.cells).length;    
+    var side = Math.sqrt(tot);
+    
     res.header('content-type',zapp.contentType);
     res.header("Access-Control-Allow-Origin", "*");
     res.render('item', {
       site  : zapp.globalSite + '/maze',
       maze  : mz,
-      debug : doc
+      debug : doc,
+      total : tot,
+      side : side
     });
   });
   
