@@ -30,6 +30,12 @@ function select(direction) {
     if($("#"+direction).attr("disabled")) {
         alert("button %s is disabled !!", direction);
     }
+    if(direction === "start") {
+        $("#navigation").show();
+    }
+    if(direction === "maze") {
+        $("#navigation").hide();
+    }
     var href = getLinkHref(direction);
     console.log("select for %s (%s)", direction, href); 
     if(href !== '') {
@@ -51,7 +57,7 @@ function processLinks(data) {
             var link = {'rel': rel, 'href': $(this).attr("href") };
             links[links.length] = link;
             console.log("%s found", rel);
-            $("#"+rel).removeAttr("disabled").addClass("enabled");        
+            $("#"+rel).removeAttr("disabled").addClass("enabled");            
         });
     //});
     $(data).find("collection").each(function(){
@@ -60,6 +66,10 @@ function processLinks(data) {
             var href = $(this).attr("href");
             $("#mazes").append(new Option(href, href));            
         });
+    });
+    
+    $(data).find("item").each(function(){
+        
     });
 
     // update current url

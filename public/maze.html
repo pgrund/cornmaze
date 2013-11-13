@@ -12,9 +12,13 @@
                 background-image: url(./img/gras.jpg);
                 background-repeat: no-repeat;
             }
+            #start.enabled {
+                background-color: lightgreen;
+                border: double darkgreen;
+            }
             #exit.enabled {
-                //.btn-danger();
-                color:red;
+                background-color: lightcoral;
+                border: double darkred;
             }
         </style>
 
@@ -28,19 +32,21 @@
     <body>
         <h1>Maze Game</h1>
         <p>
-            URL:<span id="url">http://cornmaze-grund.rhcloud.com/maze/</span>
+            URL:<!--span id="url">http://localhost:8080/maze/</span-->
+            <span id="url">http://cornmaze-grund.rhcloud.com/maze/</span>
             <button onclick="move()">go</button></p>
-        <button id="start" class="mazebtn">
+        <button id="start" class="mazebtn btn">
             <span class=""></span> Start
         </button>
-        <button id="maze" class="mazebtn">
+        <button id="maze" class="mazebtn btn">
             <span class=""></span> Restart
         </button>
-        <button id="exit" class="mazebtn" onclick="select('exit');">
+        <button id="exit" class="mazebtn btn">
             <span class=""></span> Exit
         </button>
         <select id="mazes">
-            <option value="">...</option>
+            <option>http://cornmaze-grund.rhcloud.com/maze/</option>
+            <option>http://localhost:8080/maze/</option>
         </select>
         <hr/>
         <div class="container" id="navigation">            
@@ -70,7 +76,12 @@
                     </button>
                 </div>
             </div>
-        </div>        
+            <div class="pull-right">
+                <table id="plan">                    
+                </table>
+            </div>
+        </div>   
+        
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="./javascripts/jquery.js"></script>
@@ -78,6 +89,8 @@
         <script src="./bootstrap/js/bootstrap.min.js"></script>
         <script src="javascripts/maze.js"></script>
         <script>
+            move();
+            $("#navigation").hide();
             $(".mazebtn").click(function(){select($(this)[0].id)});
             $("#mazes").change(function(){
                $("#url").text($("#mazes option:selected").val()); 
