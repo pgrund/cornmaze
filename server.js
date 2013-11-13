@@ -182,6 +182,7 @@ zapp.start();
 // handle collection 
 zapp.app.get('/maze/', function(req, res){
   res.header('content-type',zapp.contentType);
+  res.header("Access-Control-Allow-Origin", "*");
   res.render('collection', {
     title : 'Maze+XML Hypermedia Example',
     site  : zapp.globalSite
@@ -202,6 +203,7 @@ zapp.app.get('/maze/:m', function (req, res) {
     var doc = JSON.parse(data);
     
     res.header('content-type',zapp.contentType);
+    res.header("Access-Control-Allow-Origin", "*");
     res.render('item', {
       site  : zapp.globalSite + '/maze',
       maze  : mz,
@@ -219,6 +221,7 @@ zapp.app.get('/maze/:m/999', function (req, res) {
   cz = (req.params.c || '0');
 
   res.header('content-type', zapp.contentType);
+  res.header("Access-Control-Allow-Origin", "*");
   res.render('exit', {
     site  : zapp.globalSite + '/maze',
     maze  : mz,
@@ -249,6 +252,7 @@ zapp.app.get('/maze/:m/:c', function (req, res) {
     sq = Math.sqrt(tot);
     
     res.header('content-type', zapp.contentType);
+    res.header("Access-Control-Allow-Origin", "*");
     res.render('cell', {
       site  : zapp.globalSite + '/maze',
       maze  : mz,
