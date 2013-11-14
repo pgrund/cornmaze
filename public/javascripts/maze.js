@@ -25,8 +25,8 @@ $(document).keydown(function(e) {
     }
 });
 function select(direction) {
-    if ($("#" + direction).attr("disabled")) {
-        alert("button %s is disabled !!", direction);
+    if ($("#" + direction).hasClass("disabled")) {
+        alert("button is disabled !!");
     }
     if (direction === "start") {
         $("#navigation").show();
@@ -51,11 +51,11 @@ function processLinks(data) {
         var rel = $(this).attr("rel");
         var link = {'rel': rel, 'href': $(this).attr("href")};
         links[links.length] = link;
-        if(cell) {
+        if(cell){
             cell.addClass(rel);
         }
         console.log("%s found", rel);
-        $("#" + rel).removeAttr("disabled").addClass("enabled");
+        $("#" + rel).removeClass("disabled").removeClass("btn-small").addClass("btn-large");
     });
     //});
     $(data).find("collection").each(function() {
@@ -76,9 +76,19 @@ function processLinks(data) {
 function move() {
     var urlStr = $("#url").text();
     console.log("#### %s ####", urlStr);
-    $(".mazebtn").attr("disabled", "disabled").removeClass("enabled");
+    $(".mazebtn").removeClass("btn-large").addClass("disabled").addClass("btn-small");
     $.get(urlStr, processLinks, "xml");
-    updatePlan();
+    var cell = $("#"+updatePlan());
+    if(cell) {
+        $("td.current").each(function(){
+           $(this).children("span").first().removeClass('glyphicon-user'); 
+           $(this).removeClass("current");
+        });
+        cell.addClass("visited");  
+        cell.addClass("current");
+        cell.children("span").first().addClass('glyphicon-user');
+        cell.children("span").first().addClass('glyphicon');
+    }
 }
 function getLinkHref(key) {
     var i, x, rtn;

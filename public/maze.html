@@ -7,129 +7,7 @@
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-        <style>
-            #navigation {
-                background-image: url(./img/gras.jpg);
-                background-repeat: no-repeat;
-            }
-            #start.enabled {
-                background-color: lightgreen;
-                border: double darkgreen;
-            }
-            #exit.enabled {
-                background-color: lightcoral;
-                border: double darkred;
-            }
-            
-            td {
-                border:none;
-            }
-            td.visited{
-                background-color: lightgrey;
-            }
-            td.north {
-                border-left: solid;
-                border-bottom: solid;
-                border-right: solid;
-                border-top: none;    
-            }
-            td.east {
-                border-left: solid;
-                border-bottom: solid;
-                border-right: none;
-                border-top: solid;    
-            }
-            td.south {
-                border-left: solid;
-                border-bottom: none;
-                border-right: solid;
-                border-top: solid;    
-            }
-            td.west {
-                border-left: none;
-                border-bottom: solid;
-                border-right: solid;
-                border-top: solid;    
-            }
-            td.north.east {
-                border-left: solid;
-                border-bottom: solid;
-                border-right: none;
-                border-top: none;    
-            }
-            td.north.south {
-                border-left: solid;
-                border-bottom: none;
-                border-right: solid;
-                border-top: none;    
-            }
-            td.north.west {
-                border-left: none;
-                border-bottom: solid;
-                border-right: solid;
-                border-top: none;    
-            }
-            td.north.east.west {
-                border-left: none;
-                border-bottom: solid;
-                border-right: none;
-                border-top: none;    
-            }
-            td.north.east.south {
-                border-left: solid;
-                border-bottom: none;
-                border-right: none;
-                border-top: none;    
-            }
-            td.north.south.west{
-                border-left: none;
-                border-bottom: none;
-                border-right: solid;
-                border-top: none;    
-            }
-            td.north.east.south.west {
-                border-left: none;
-                border-bottom: none;
-                border-right: none;
-                border-top: none;    
-            }
-            td.east.south {
-                border-left: solid;
-                border-bottom: none;
-                border-right: none;
-                border-top: solid;    
-            }
-            td.east.west {
-                border-left: none;
-                border-bottom: solid;
-                border-right: none;
-                border-top: solid;    
-            }
-            td.east.south.west {
-                border-left: none;
-                border-bottom: none;
-                border-right: none;
-                border-top: solid;    
-            }
-            td.east {
-                border-left: solid;
-                border-bottom: solid;
-                border-right: none;
-                border-top: solid;    
-            }
-            td.south.west {
-                border-left: none;
-                border-bottom: none;
-                border-right: solid;
-                border-top: solid;    
-            }
-            td.south {
-                border-left: solid;
-                border-bottom: none;
-                border-right: solid;
-                border-top: solid;    
-            }
-        </style>
+        <link href="stylesheets/style.css" rel="stylesheet">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -143,22 +21,60 @@
         <p>
             URL:<!--span id="url">http://localhost:8080/maze/</span-->
             <span id="url">http://cornmaze-grund.rhcloud.com/maze/</span>
-            <button onclick="move()">go</button></p>
-        <button id="start" class="mazebtn btn">
-            <span class=""></span> Start
-        </button>
-        <button id="maze" class="mazebtn btn">
-            <span class=""></span> Restart
-        </button>
-        <button id="exit" class="mazebtn btn">
-            <span class=""></span> Exit
-        </button>
-        <select id="mazes">
-            <option>http://cornmaze-grund.rhcloud.com/maze/</option>
-            <option>http://localhost:8080/maze/</option>
-        </select>
+            <br/>
+            <button id="start" class="mazebtn btn btn-success">
+                <span class=""></span> Start
+            </button>
+            <button id="maze" class="mazebtn btn btn-warning">
+                <span class=""></span> Restart
+            </button>
+            <button id="exit" class="mazebtn btn btn-danger">
+                <span class=""></span> Exit
+            </button>
+            <select id="mazes">
+                <option>http://cornmaze-grund.rhcloud.com/maze/</option>
+                <option>http://localhost:8080/maze/</option>
+            </select>
         <hr/>
-        <div class="container" id="navigation">            
+
+        <table id="plan">                    
+            <tr>
+                <td id="0"><span></span></td>
+                <td id="5"><span></span></td>
+                <td id="10"><span></span></td>
+                <td id="15"><span></span></td>
+                <td id="20"><span></span></td>
+            </tr>
+            <tr>
+                <td id="1"><span></span></td>
+                <td id="6"><span></span></td>
+                <td id="11"><span></span></td>
+                <td id="16"><span></span></td>
+                <td id="21"><span></span></td>
+            </tr>
+            <tr>
+                <td id="2"><span></span></td>
+                <td id="7"><span></span></td>
+                <td id="12"><span></span></td>
+                <td id="17"><span></span></td>
+                <td id="22"><span></span></td>
+            </tr>
+            <tr>
+                <td id="3"><span></span></td>
+                <td id="8"><span></span></td>
+                <td id="13"><span></span></td>
+                <td id="18"><span></span></td>
+                <td id="23"><span></span></td>
+            </tr>
+            <tr>
+                <td id="4"><span></span></td>
+                <td id="9"><span></span></td>
+                <td id="14"><span></span></td>
+                <td id="19"><span></span></td>
+                <td id="24"><span class="glyphicon glyphicon-home"></span></td>
+            </tr>
+        </table>
+        <div class="container" id="navigation">
             <div class="row">
                 <div class="col-md-1 col-md-offset-1">
                     <button id="north" class="mazebtn">
@@ -185,66 +101,24 @@
                     </button>
                 </div>
             </div>
-            <div class="pull-right">
-                <table id="plan">                    
-                    <tr>
-                        <td id="0">0</td>
-                        <td id="5">5</td>
-                        <td id="10">10</td>
-                        <td id="15">15</td>
-                        <td id="20">20</td>
-                    </tr>
-                    <tr>
-                        <td id="1">1</td>
-                        <td id="6">6</td>
-                        <td id="11">11</td>
-                        <td id="16">16</td>
-                        <td id="21">21</td>
-                    </tr>
-                    <tr>
-                        <td id="2">2</td>
-                        <td id="7">7</td>
-                        <td id="12">12</td>
-                        <td id="17">17</td>
-                        <td id="22">22</td>
-                    </tr>
-                    <tr>
-                        <td id="3">3</td>
-                        <td id="8">8</td>
-                        <td id="13">13</td>
-                        <td id="18">18</td>
-                        <td id="23">23</td>
-                    </tr>
-                    <tr>
-                        <td id="4">4</td>
-                        <td id="9">9</td>
-                        <td id="14">14</td>
-                        <td id="19">19</td>
-                        <td id="24">24</td>
-                    </tr>
-                </table>
-            </div>
         </div>   
 
-        
-        <input id="test" size="66"/>
-        <button onclick="updatePlan();">test</button>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="./javascripts/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="./bootstrap/js/bootstrap.min.js"></script>
         <script src="javascripts/maze.js"></script>
         <script>
+            move();
+            $("#navigation").hide();
+            $(".mazebtn").click(function() {
+                select($(this)[0].id)
+            });
+            $("#mazes").change(function() {
+                $("#url").text($("#mazes option:selected").val());
                 move();
-                $("#navigation").hide();
-                $(".mazebtn").click(function() {
-                    select($(this)[0].id)
-                });
-                $("#mazes").change(function() {
-                    $("#url").text($("#mazes option:selected").val());
-                    move();
-                });
-                
+            });
+
         </script>
     </body>
 </html>
