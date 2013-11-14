@@ -20,6 +20,115 @@
                 background-color: lightcoral;
                 border: double darkred;
             }
+            
+            td {
+                border:none;
+            }
+            td.visited{
+                background-color: lightgrey;
+            }
+            td.north {
+                border-left: solid;
+                border-bottom: solid;
+                border-right: solid;
+                border-top: none;    
+            }
+            td.east {
+                border-left: solid;
+                border-bottom: solid;
+                border-right: none;
+                border-top: solid;    
+            }
+            td.south {
+                border-left: solid;
+                border-bottom: none;
+                border-right: solid;
+                border-top: solid;    
+            }
+            td.west {
+                border-left: none;
+                border-bottom: solid;
+                border-right: solid;
+                border-top: solid;    
+            }
+            td.north.east {
+                border-left: solid;
+                border-bottom: solid;
+                border-right: none;
+                border-top: none;    
+            }
+            td.north.south {
+                border-left: solid;
+                border-bottom: none;
+                border-right: solid;
+                border-top: none;    
+            }
+            td.north.west {
+                border-left: none;
+                border-bottom: solid;
+                border-right: solid;
+                border-top: none;    
+            }
+            td.north.east.west {
+                border-left: none;
+                border-bottom: solid;
+                border-right: none;
+                border-top: none;    
+            }
+            td.north.east.south {
+                border-left: solid;
+                border-bottom: none;
+                border-right: none;
+                border-top: none;    
+            }
+            td.north.south.west{
+                border-left: none;
+                border-bottom: none;
+                border-right: solid;
+                border-top: none;    
+            }
+            td.north.east.south.west {
+                border-left: none;
+                border-bottom: none;
+                border-right: none;
+                border-top: none;    
+            }
+            td.east.south {
+                border-left: solid;
+                border-bottom: none;
+                border-right: none;
+                border-top: solid;    
+            }
+            td.east.west {
+                border-left: none;
+                border-bottom: solid;
+                border-right: none;
+                border-top: solid;    
+            }
+            td.east.south.west {
+                border-left: none;
+                border-bottom: none;
+                border-right: none;
+                border-top: solid;    
+            }
+            td.east {
+                border-left: solid;
+                border-bottom: solid;
+                border-right: none;
+                border-top: solid;    
+            }
+            td.south.west {
+                border-left: none;
+                border-bottom: none;
+                border-right: solid;
+                border-top: solid;    
+            }
+            td.south {
+                border-left: solid;
+                border-bottom: none;
+                border-right: solid;
+                border-top: solid;    
+            }
         </style>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -78,6 +187,41 @@
             </div>
             <div class="pull-right">
                 <table id="plan">                    
+                    <tr>
+                        <td id="0">0</td>
+                        <td id="5">5</td>
+                        <td id="10">10</td>
+                        <td id="15">15</td>
+                        <td id="20">20</td>
+                    </tr>
+                    <tr>
+                        <td id="1">1</td>
+                        <td id="6">6</td>
+                        <td id="11">11</td>
+                        <td id="16">16</td>
+                        <td id="21">21</td>
+                    </tr>
+                    <tr>
+                        <td id="2">2</td>
+                        <td id="7">7</td>
+                        <td id="12">12</td>
+                        <td id="17">17</td>
+                        <td id="22">22</td>
+                    </tr>
+                    <tr>
+                        <td id="3">3</td>
+                        <td id="8">8</td>
+                        <td id="13">13</td>
+                        <td id="18">18</td>
+                        <td id="23">23</td>
+                    </tr>
+                    <tr>
+                        <td id="4">4</td>
+                        <td id="9">9</td>
+                        <td id="14">14</td>
+                        <td id="19">19</td>
+                        <td id="24">24</td>
+                    </tr>
                 </table>
             </div>
         </div>   
