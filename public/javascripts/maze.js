@@ -30,6 +30,8 @@ function select(direction) {
     }
     if (direction === "start") {
         $("#navigation").show();
+        $("#plan td").removeClass("north").removeClass("east")
+                .removeClass("south").removeClass("west").removeClass("visited");
     }
     if (direction === "maze") {
         $("#navigation").hide();
@@ -110,4 +112,7 @@ function updatePlan() {
         return matches[6];
     }
 
+}
+function viewMaze(element) {
+    
 }
