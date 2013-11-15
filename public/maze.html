@@ -27,77 +27,44 @@
             </button>
             <button id="maze" class="mazebtn btn btn-warning">
                 <span class=""></span> Restart
-            </button>
-            <button id="exit" class="mazebtn btn btn-danger">
-                <span class=""></span> Exit
-            </button>
+            </button>            
             <select id="mazes">
                 <option>http://cornmaze-grund.rhcloud.com/maze/</option>
                 <option>http://localhost:8080/maze/</option>
             </select>
         <hr/>
 
-        <table id="plan">                    
-            <tr>
-                <td id="0"><span></span></td>
-                <td id="5"><span></span></td>
-                <td id="10"><span></span></td>
-                <td id="15"><span></span></td>
-                <td id="20"><span></span></td>
-            </tr>
-            <tr>
-                <td id="1"><span></span></td>
-                <td id="6"><span></span></td>
-                <td id="11"><span></span></td>
-                <td id="16"><span></span></td>
-                <td id="21"><span></span></td>
-            </tr>
-            <tr>
-                <td id="2"><span></span></td>
-                <td id="7"><span></span></td>
-                <td id="12"><span></span></td>
-                <td id="17"><span></span></td>
-                <td id="22"><span></span></td>
-            </tr>
-            <tr>
-                <td id="3"><span></span></td>
-                <td id="8"><span></span></td>
-                <td id="13"><span></span></td>
-                <td id="18"><span></span></td>
-                <td id="23"><span></span></td>
-            </tr>
-            <tr>
-                <td id="4"><span></span></td>
-                <td id="9"><span></span></td>
-                <td id="14"><span></span></td>
-                <td id="19"><span></span></td>
-                <td id="24"><span class="glyphicon glyphicon-home"></span></td>
-            </tr>
+        <table id="plan">            
         </table>
         <div class="container" id="navigation">
             <div class="row">
                 <div class="col-md-1 col-md-offset-1">
                     <button id="north" class="mazebtn">
-                        <span class="glyphicon glyphicon-arrow-up"></span> North
+                        <span class="glyphicon glyphicon-arrow-up"></span><br/>North
                     </button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-1">
                     <button id="west" class="mazebtn">
-                        <span class="glyphicon glyphicon-arrow-left"></span> West
+                        <span class="glyphicon glyphicon-arrow-left"></span><br/>West
                     </button>
                 </div>
-                <div class="col-md-1 col-md-offset-1">
+                <div class="col-md-1">
+                    <button id="exit" class="mazebtn btn btn-danger">
+                        <span class="glyphicon glyphicon-home"></span><br/>Exit
+                    </button>
+                </div>
+                <div class="col-md-1">
                     <button id="east" class="mazebtn">
-                        <span class="glyphicon glyphicon-arrow-right"></span> East
+                        <span class="glyphicon glyphicon-arrow-right"></span><br/>East
                     </button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-1 col-md-offset-1">
                     <button id="south" class="mazebtn">
-                        <span class="glyphicon glyphicon-arrow-down"></span> South
+                        <span class="glyphicon glyphicon-arrow-down"></span><br/>South
                     </button>
                 </div>
             </div>

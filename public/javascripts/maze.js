@@ -46,14 +46,14 @@ function select(direction) {
 function processLinks(data) {
     // reset links array
     links = [];
-    
-    var cell = $("#"+updatePlan());
-     
+
+    var cell = $("#" + updatePlan());
+
     $(data).find("link").each(function() {
         var rel = $(this).attr("rel");
         var link = {'rel': rel, 'href': $(this).attr("href")};
         links[links.length] = link;
-        if(cell){
+        if (cell) {
             cell.addClass(rel);
         }
         console.log("%s found", rel);
@@ -68,7 +68,28 @@ function processLinks(data) {
         });
     });
     $(data).find("item").each(function() {
-
+        var total = $(this).attr("total");
+        var side = $(this).attr("side");
+        console.log("item found %sx%s", side, side);
+        $("#plan").empty();
+        var newContent = "";
+        for (i = 0; i < side; i++) {
+            newContent +="<tr class='row'>";
+            console.log("added row #%s", i);            
+            for (k = 0; k < side; k++) {
+                var index = (k * side) + i;
+                newContent+="<td id='";
+                newContent+=index;
+                if(i === (side-1) && k === (side-1)){
+                    newContent+="'><span class='glyphicon glyphicon-home'></span></td>";
+                }else {
+                    newContent+="'><span></span></td>";
+                }
+                console.log("added %s with (%s, %s)", index, i, k );
+            }
+            newContent +="</tr>";
+        }
+        $("#plan").html(newContent);
     });
     // update current url
     $("#url").text($(data).find("cell[rel='current']").first().attr("href"));
@@ -80,13 +101,13 @@ function move() {
     console.log("#### %s ####", urlStr);
     $(".mazebtn").removeClass("btn-large").addClass("disabled").addClass("btn-small");
     $.get(urlStr, processLinks, "xml");
-    var cell = $("#"+updatePlan());
-    if(cell) {
-        $("td.current").each(function(){
-           $(this).children("span").first().removeClass('glyphicon-user'); 
-           $(this).removeClass("current");
+    var cell = $("#" + updatePlan());
+    if (cell) {
+        $("td.current").each(function() {
+            $(this).children("span").first().removeClass('glyphicon-user');
+            $(this).removeClass("current");
         });
-        cell.addClass("visited");  
+        cell.addClass("visited");
         cell.addClass("current");
         cell.children("span").first().addClass('glyphicon-user');
         cell.children("span").first().addClass('glyphicon');
@@ -114,5 +135,5 @@ function updatePlan() {
 
 }
 function viewMaze(element) {
-    
+
 }
