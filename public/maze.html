@@ -34,42 +34,50 @@
             </select>
         <hr/>
 
-        <table id="plan">            
-        </table>
-        <div class="container" id="navigation">
+        <div class="container">
             <div class="row">
-                <div class="col-md-1 col-md-offset-1">
-                    <button id="north" class="mazebtn">
-                        <span class="glyphicon glyphicon-arrow-up"></span><br/>North
-                    </button>
+                <div class="col-md-2">
+                    <table id="plan">            
+                    </table>
+                </div>
+                <div class="col-md-2">
+                    <div class="container" id="navigation">
+                        <div class="row">
+                            <div class="col-md-1 col-md-offset-1">
+                                <button id="north" class="mazebtn">
+                                    <span class="glyphicon glyphicon-arrow-up"></span><br/>North
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <button id="west" class="mazebtn">
+                                    <span class="glyphicon glyphicon-arrow-left"></span><br/>West
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+                                <button id="exit" class="mazebtn btn btn-danger">
+                                    <span class="glyphicon glyphicon-home"></span><br/>Exit
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+                                <button id="east" class="mazebtn">
+                                    <span class="glyphicon glyphicon-arrow-right"></span><br/>East
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1 col-md-offset-1">
+                                <button id="south" class="mazebtn">
+                                    <span class="glyphicon glyphicon-arrow-down"></span><br/>South
+                                </button>
+                            </div>
+                        </div>
+                    </div>   
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-1">
-                    <button id="west" class="mazebtn">
-                        <span class="glyphicon glyphicon-arrow-left"></span><br/>West
-                    </button>
-                </div>
-                <div class="col-md-1">
-                    <button id="exit" class="mazebtn btn btn-danger">
-                        <span class="glyphicon glyphicon-home"></span><br/>Exit
-                    </button>
-                </div>
-                <div class="col-md-1">
-                    <button id="east" class="mazebtn">
-                        <span class="glyphicon glyphicon-arrow-right"></span><br/>East
-                    </button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-1 col-md-offset-1">
-                    <button id="south" class="mazebtn">
-                        <span class="glyphicon glyphicon-arrow-down"></span><br/>South
-                    </button>
-                </div>
-            </div>
-        </div>   
-
+            <div class="col-md-8"></div>
+        </div>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="./javascripts/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
