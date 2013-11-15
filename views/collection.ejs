@@ -1,3 +1,5 @@
 <collection href="<%=site%>/maze/">
-  <link rel="maze" href="<%=site%>/maze/five-by-five/" />
+<% for(var i=0; i<mazes.length; i++) {%>
+ <link rel="maze" href="<%=site%>/maze/<%=mazes[i]%>/" />
+<% } %>  
 </collection>

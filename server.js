@@ -107,11 +107,6 @@ var SampleApp = function() {
     self.createRoutes = function() {
         self.routes = {};
 
-        self.routes['/asciimo'] = function(req, res) {
-            var link = "http://i.imgur.com/kmbjB.png";
-            res.send("<html><body><img src='" + link + "'></body></html>");
-        };
-
         self.routes['/'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('index.html'));
@@ -181,11 +176,21 @@ zapp.start();
 
 // handle collection 
 zapp.app.get('/maze/', function(req, res){
-  res.header('content-type',zapp.contentType);
-  res.header("Access-Control-Allow-Origin", "*");
+  var collection = [];
+  var files = fs.readdirSync(".");
+  for(i=0, j=files.length; i<j;i++){
+      var match=files[i].match(/(.*-by-.*)\.json$/);
+      if(match && match[1]) {
+        collection.push(match[1]);              
+      }
+  }
+  
+  res.header('content-type',zapp.contentType);  
+  res.header("Access-Control-Allow-Origin", "*");  
   res.render('collection', {
     title : 'Maze+XML Hypermedia Example',
-    site  : zapp.globalSite
+    site  : zapp.globalSite,
+    mazes : collection
   });
 });
 
