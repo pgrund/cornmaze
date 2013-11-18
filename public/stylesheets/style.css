@@ -13,8 +13,13 @@
     color: cornflowerblue;
 }
 
+table#plan {
+    border-style: none;
+    empty-cells: show;
+    border-collapse: separate;
+}
 td {
-    border:none;
+    border-style:none;
     height: 2em;
 }
 td.visited{
