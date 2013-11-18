@@ -54,9 +54,11 @@ function processLinks(data) {
         var link = {'rel': rel, 'href': $(this).attr("href")};
         links[links.length] = link;
         if (cell) {
-            cell.addClass(rel);
+            if(["north", "east", "south", "west", "exit"].indexOf(rel)>=0){
+                cell.addClass(rel);
+                console.log("borders found for %s", rel);
+           }
         }
-        console.log("%s found", rel);
         $("#" + rel).removeClass("disabled").removeClass("btn-small").addClass("btn-large");
     });
     //});
