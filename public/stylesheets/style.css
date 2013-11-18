@@ -16,9 +16,11 @@
 table#plan {
     border-style: none;
     empty-cells: show;
+    border-spacing: 0; 
     border-collapse: separate;
 }
 td {
+    background-clip: padding-box;
     border-style:none;
     height: 2em;
 }
