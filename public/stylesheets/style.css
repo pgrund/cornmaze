@@ -19,115 +19,117 @@ table#plan {
     border-spacing: 0; 
     border-collapse: separate;
 }
-td {
+
+#plan td {
     background-clip: padding-box;
     border-style:none;
     height: 2em;
 }
-td.visited{
-    background-color: lightgrey;
-}
-td.current span{
+#plan td.current span{
     //font-size: 12px;
     color: darkgreen;
 }
-td.north {
+#plan td.current.danger span{
+    //font-size: 12px;
+    color: red;
+}
+#plan td.north {
     border-left: solid;
     border-bottom: solid;
     border-right: solid;
     border-top: none;    
 }
-td.east {
+#plan td.east {
     border-left: solid;
     border-bottom: solid;
     border-right: none;
     border-top: solid;    
 }
-td.south {
+#plan td.south {
     border-left: solid;
     border-bottom: none;
     border-right: solid;
     border-top: solid;    
 }
-td.west {
+#plan td.west {
     border-left: none;
     border-bottom: solid;
     border-right: solid;
     border-top: solid;    
 }
-td.north.east {
+#plan td.north.east {
     border-left: solid;
     border-bottom: solid;
     border-right: none;
     border-top: none;    
 }
-td.north.south {
+#plan td.north.south {
     border-left: solid;
-    border-bottom: none;
-    border-right: solid;
-    border-top: none;    
-}
-td.north.west {
-    border-left: none;
-    border-bottom: solid;
-    border-right: solid;
-    border-top: none;    
-}
-td.north.east.west {
-    border-left: none;
-    border-bottom: solid;
-    border-right: none;
-    border-top: none;    
-}
-td.north.east.south {
-    border-left: solid;
-    border-bottom: none;
-    border-right: none;
-    border-top: none;    
-}
-td.north.south.west{
-    border-left: none;
     border-bottom: none;
     border-right: solid;
     border-top: none;    
 }
-td.north.east.south.west {
+#plan td.north.west {
+    border-left: none;
+    border-bottom: solid;
+    border-right: solid;
+    border-top: none;    
+}
+#plan td.north.east.west {
+    border-left: none;
+    border-bottom: solid;
+    border-right: none;
+    border-top: none;    
+}
+#plan td.north.east.south {
+    border-left: solid;
+    border-bottom: none;
+    border-right: none;
+    border-top: none;    
+}
+#plan td.north.south.west{
+    border-left: none;
+    border-bottom: none;
+    border-right: solid;
+    border-top: none;    
+}
+#plan td.north.east.south.west {
     border-left: none;
     border-bottom: none;
     border-right: none;
     border-top: none;    
 }
-td.east.south {
+#plan td.east.south {
     border-left: solid;
     border-bottom: none;
     border-right: none;
     border-top: solid;    
 }
-td.east.west {
+#plan td.east.west {
     border-left: none;
     border-bottom: solid;
     border-right: none;
     border-top: solid;    
 }
-td.east.south.west {
+#plan td.east.south.west {
     border-left: none;
     border-bottom: none;
     border-right: none;
     border-top: solid;    
 }
-td.east {
+#plan td.east {
     border-left: solid;
     border-bottom: solid;
     border-right: none;
     border-top: solid;    
 }
-td.south.west {
+#plan td.south.west {
     border-left: none;
     border-bottom: none;
     border-right: solid;
     border-top: solid;    
 }
-td.south {
+#plan td.south {
     border-left: solid;
     border-bottom: none;
     border-right: solid;
