@@ -18,26 +18,67 @@
     </head>
     <body>
         <h1>Maze Game</h1>
-        <p>
-            URL:<!--span id="url">http://localhost:8080/maze/</span-->
-            <span id="url">http://cornmaze-grund.rhcloud.com/maze/</span>
-            <br/>
-            <button id="start" class="mazebtn btn btn-success">
-                <span class=""></span> Start
-            </button>
-            <button id="maze" class="mazebtn btn btn-warning">
-                <span class=""></span> Restart
-            </button>            
-            <select id="mazes">
-                <option>http://cornmaze-grund.rhcloud.com/maze/</option>
-                <option>http://localhost:8080/maze/</option>
-            </select>
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="url" class="col-sm-2 control-label">URL</label>
+                <div class="col-sm-10">
+                    <input type="url" id="url" class="form-control" value="http://cornmaze-grund.rhcloud.com/maze/"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="optionUrl" class="col-sm-2 control-label">Hosts</label>
+                <div class="col-sm-10">
+                    <div class="radio">
+                        <label>             
+                            <input type="radio" name="optionUrl" value="http://cornmaze-grund.rhcloud.com/maze/" id="openshift" checked="checked"/>
+                            in the cloud <em>(cornmaze-grund.rhcloud.com)</em>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>             
+                            <input type="radio" name="optionUrl" value="http://localhost:8080/maze/" id="local"/>
+                            local <em>(localhost:8080)</em>
+                        </label>
+                    </div>    
+                </div>
+            </div>
+        </form>
+
+        <div id="errorModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="model-content alert alert-danger">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h2 class="modal-title alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Error</h2>
+                    </div>
+                    <div class="modal-body">
+                        This is no valid direction, probably there is a wall in the way ...                
+                    </div>
+                    <div class="modal-footer">  
+                        <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>  
+                    </div> 
+                </div>
+
+            </div>
+        </div>
+
+        <div id="error"  class="modal hide fade in" style="display: none; ">  
+        </div>
+        <br/>
+        <button id="start" class="mazebtn btn btn-success">
+            <span class=""></span> Start
+        </button>
+        <button id="maze" class="mazebtn btn btn-warning">
+            <span class=""></span> Restart
+        </button>            
+        <select id="mazes">               
+        </select>        
         <hr/>
 
         <div class="container">
             <div class="row">
                 <div class="col-md-2">
-                    <table id="plan">            
+                    <table id="plan" class="table">            
                     </table>
                 </div>
                 <div class="col-md-2">
@@ -87,13 +128,18 @@
             move();
             $("#navigation").hide();
             $(".mazebtn").click(function() {
-                select($(this)[0].id)
+                select($(this)[0].id);
             });
             $("#mazes").change(function() {
-                $("#url").text($("#mazes option:selected").val());
+                $("#url").val($("#mazes option:selected").val());
                 move();
             });
-
+            $("input[name='optionUrl']").change(function() {
+                $("#mazes").empty();
+                $("#url").val($("input[name='optionUrl']:checked").val());
+                move();
+            });
+            //$("#messages").modal();
         </script>
     </body>
 </html>
