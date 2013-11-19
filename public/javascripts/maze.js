@@ -23,11 +23,22 @@ $(document).keydown(function(e) {
         select("south");
         return false;
     }
+    if (e.keyCode === 27) {
+        select("maze");
+        return false;
+    }
 });
 function select(direction) {
+    console.log("select for %s", direction);
     if ($("#" + direction).hasClass("disabled")) {
-        alert("button is disabled !!");
-    }
+        var cell = $("#" + updatePlan());
+        if(cell){
+            currentCellStyling(cell);
+            cell.addClass("danger");
+        }
+        $("#errorModal").modal();
+        console.log("button %s is disabled !!", direction);      
+    } 
     if (direction === "start") {
         $("#navigation").show();
         $("#plan td").removeClass("north").removeClass("east")
@@ -36,10 +47,9 @@ function select(direction) {
     if (direction === "maze") {
         $("#navigation").hide();
     }
-    var href = getLinkHref(direction);
-    console.log("select for %s (%s)", direction, href);
+    var href = getLinkHref(direction);    
     if (href !== '') {
-        $("#url").text(href);
+        $("#url").val(href);
         move();
     }
 }
@@ -56,12 +66,11 @@ function processLinks(data) {
         if (cell) {
             if(["north", "east", "south", "west", "exit"].indexOf(rel)>=0){
                 cell.addClass(rel);
-                console.log("borders found for %s", rel);
+                //console.log("borders found for %s", rel);
            }
         }
         $("#" + rel).removeClass("disabled").removeClass("btn-small").addClass("btn-large");
     });
-    //});
     $(data).find("collection").each(function() {
         var collection = $(this);
         collection.find("link[rel='maze']").each(function() {
@@ -70,14 +79,12 @@ function processLinks(data) {
         });
     });
     $(data).find("item").each(function() {
-        var total = $(this).attr("total");
         var side = $(this).attr("side");
-        console.log("item found %sx%s", side, side);
+        console.log("creating maze for 'item' of %sx%s", side, side);
         $("#plan").empty();
         var newContent = "";
         for (i = 0; i < side; i++) {
             newContent +="<tr class='row'>";
-            console.log("added row #%s", i);            
             for (k = 0; k < side; k++) {
                 var index = (k * side) + i;
                 newContent+="<td id='";
@@ -87,33 +94,35 @@ function processLinks(data) {
                 }else {
                     newContent+="'><span></span></td>";
                 }
-                console.log("added %s with (%s, %s)", index, i, k );
             }
             newContent +="</tr>";
         }
         $("#plan").html(newContent);
     });
     // update current url
-    $("#url").text($(data).find("cell[rel='current']").first().attr("href"));
-    //console.log("processLinks: %s", links);
+    $("#url").val($(data).find("cell[rel='current']").first().attr("href"));
 }
 
 function move() {
-    var urlStr = $("#url").text();
-    console.log("#### %s ####", urlStr);
+    var urlStr = $("#url").val();
+    console.log("#### moving to %s ####", urlStr);
     $(".mazebtn").removeClass("btn-large").addClass("disabled").addClass("btn-small");
     $.get(urlStr, processLinks, "xml");
     var cell = $("#" + updatePlan());
+    currentCellStyling(cell);
+    
+}
+function currentCellStyling(cell){
     if (cell) {
         $("td.current").each(function() {
             $(this).children("span").first().removeClass('glyphicon-user');
             $(this).removeClass("current");
         });
-        cell.addClass("visited");
+        cell.addClass("success");
         cell.addClass("current");
         cell.children("span").first().addClass('glyphicon-user');
         cell.children("span").first().addClass('glyphicon');
-    }
+    } 
 }
 function getLinkHref(key) {
     var i, x, rtn;
@@ -124,18 +133,19 @@ function getLinkHref(key) {
             break;
         }
     }
+    if(rtn){
+        console.log("returning %s", rtn);
+    } else {
+        return '';
+    }
     return rtn;
 }
 function updatePlan() {
     var urlRegex = /(https?:\/\/)?([\da-z\.-])+(\.[a-z\.]{2,6})*(:\d{2,60})?\/maze\/([\/\w \.-]*)*\/(\d+)(:(.*))?\/?$/;
-    var url = $("#url").text();
-    // $("#test").val();
+    var url = $("#url").val();
     var matches = url.match(urlRegex);
     if (matches) {
         return matches[6];
     }
-
-}
-function viewMaze(element) {
 
 }
