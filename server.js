@@ -2,6 +2,8 @@
 //
 //  OpenShift sample Node application
 var express = require('express');
+var bodyParser  = require('body-parser');
+var methodOverride  = require('method-override');
 var fs = require('fs');
 
 
@@ -121,16 +123,18 @@ var SampleApp = function() {
     self.initializeServer = function() {
         self.createRoutes();
         self.app = express();
-
-        self.app.configure(function() {
-            self.app.set('views', __dirname + '/views');
-            self.app.set('view engine', 'ejs');
-            self.app.use(express.bodyParser());
-            self.app.use(express.methodOverride());
-            self.app.use(express.static(__dirname + '/public'));
-        });
+    
+        self.app.set('views', __dirname + '/views');
+        self.app.set('view engine', 'ejs');
+        self.app.use(bodyParser.json());
+        self.app.use(bodyParser.urlencoded({
+          extended: true
+        }));
+        self.app.use(methodOverride());
+        self.app.use(express.static(__dirname + '/public'));
+       
         // debug mode
-        self.app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+        
 
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
@@ -161,6 +165,11 @@ var SampleApp = function() {
             console.log('%s: Node server started on %s:%d ...',
                     Date(Date.now()), self.ipaddress, self.port);
         });
+    };
+    self.erroHandler = function (err, req, res, next) {
+        console.error(err.stack);
+        res.status(500);
+        res.render('error', { error: err });
     };
 
 };   /*  Sample Application.  */
