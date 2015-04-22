@@ -31,15 +31,21 @@
             <div class="form-group">
                 <label for="optionUrl" class="col-sm-2 control-label">Hosts</label>
                 <div class="col-sm-10">
+                 <div class="radio">
+                        <label>             
+                            <input type="radio" name="optionUrl" id="default" checked="checked"/>
+                            ... this ...
+                        </label>
+                    </div>
                     <div class="radio">
                         <label>             
-                            <input type="radio" name="optionUrl" value="http://cornmaze-grund.rhcloud.com/maze/" id="openshift" checked="checked"/>
+                            <input type="radio" name="optionUrl" value="http://cornmaze-grund.rhcloud.com/maze/" id="openshift"/>
                             in the cloud <em>(cornmaze-grund.rhcloud.com)</em>
                         </label>
                     </div>
                     <div class="radio">
                         <label>             
-                            <input type="radio" name="optionUrl" value="http://localhost:8080/maze/" id="local"/>
+                            <input type="radio" name="optionUrl" value="http://localhost:9000/maze/" id="local"/>
                             local <em>(localhost:8080)</em>
                         </label>
                     </div>    
@@ -146,6 +152,10 @@
         
         <script src="javascripts/maze.js"></script>
         <script>
+            var currentUrl = "http://"+location.host + "/maze"
+            $("#default").attr('value', currentUrl);
+            $("#url").val(""+currentUrl);
+            
             move();
             $("#navigation").hide();
             $(".mazebtn").click(function() {
