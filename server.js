@@ -16,8 +16,7 @@ var SampleApp = function() {
     var self = this;
     
     self.contentType = 'application/xml';
-    self.globalSite='';
-
+    
     /*  ================================================================  */
     /*  Helper functions.                                                 */
     /*  ================================================================  */
@@ -33,12 +32,9 @@ var SampleApp = function() {
         if (typeof self.ipaddress === "undefined") {
             //  Log errors on OpenShift but continue w/ 127.0.0.1 - this
             //  allows us to run/test the app locally.
-            console.warn('No OPENSHIFT_NODEJS_IP var, using 127.0.0.1');
-            self.ipaddress = "127.0.0.1";
-            self.globalSite = "http://localhost:" + self.port;
-        } else {
-            self.globalSite = "http://cornmaze-grund.rhcloud.com";
-        }
+            console.warn('No OPENSHIFT_NODEJS_IP var, using 0.0.0.0');
+            self.ipaddress = "0.0.0.0";            
+        } 
     };
 
 
@@ -132,6 +128,12 @@ var SampleApp = function() {
         }));
         self.app.use(methodOverride());
         self.app.use(express.static(__dirname + '/public'));
+        self.app.use(function(req, res, next) {
+          req.getGlobal = function() {
+            return req.protocol + "://" + req.get('host') ;
+          }
+          return next();
+        });
        
         // debug mode
         
@@ -193,12 +195,12 @@ zapp.app.get('/maze/', function(req, res){
         collection.push(match[1]);              
       }
   }
-  
+    
   res.header('content-type',zapp.contentType);  
   res.header("Access-Control-Allow-Origin", "*");  
   res.render('collection', {
     title : 'Maze+XML Hypermedia Example',
-    site  : zapp.globalSite,
+    site  : req.getGlobal(),
     mazes : collection
   });
 });
@@ -222,7 +224,7 @@ zapp.app.get('/maze/:m', function (req, res) {
     res.header('content-type',zapp.contentType);
     res.header("Access-Control-Allow-Origin", "*");
     res.render('item', {
-      site  : zapp.globalSite + '/maze',
+      site  : req.getGlobal() + '/maze',
       maze  : mz,
       debug : doc,
       total : tot,
@@ -242,7 +244,7 @@ zapp.app.get('/maze/:m/999', function (req, res) {
   res.header('content-type', zapp.contentType);
   res.header("Access-Control-Allow-Origin", "*");
   res.render('exit', {
-    site  : zapp.globalSite + '/maze',
+    site  : req.getGlobal() + '/maze',
     maze  : mz,
     cell  : cz,
     total : 0,
@@ -273,7 +275,7 @@ zapp.app.get('/maze/:m/:c', function (req, res) {
     res.header('content-type', zapp.contentType);
     res.header("Access-Control-Allow-Origin", "*");
     res.render('cell', {
-      site  : zapp.globalSite + '/maze',
+      site  : req.getGlobal() + '/maze',
       maze  : mz,
       cell  : cz,
       total : tot,
